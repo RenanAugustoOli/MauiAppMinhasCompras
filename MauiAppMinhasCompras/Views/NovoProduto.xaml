@@ -8,15 +8,15 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salvar" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
-    
-    
+
+
     <VerticalStackLayout Spacing="10" Padding="10">
         <Label Text="Descrição do produto"/>
         <Entry x:Name="txt_descricao"/>
-        
+
         <Label Text="Quantidade"/>
         <Entry x:Name="txt_quantidade" Keyboard="Numeric"/>
-        
+
         <Label Text="Preço unitário"/>
         <Entry x:Name="txt_preco" Keyboard="Numeric"/>
     </VerticalStackLayout>
