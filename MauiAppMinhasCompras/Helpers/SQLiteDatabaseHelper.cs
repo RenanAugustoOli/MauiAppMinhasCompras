@@ -34,16 +34,7 @@ namespace MauiAppMinhasCompras.Helpers
             return _conn.Table<Produto>().DeleteAsync(i => i.Id == id); 
         } 
  
-        public Task<List<Produto>> GetAll()  
-        { 
-            return _conn.Table<Produto>().ToListAsync(); 
-        } 
  
-        public Task<List<Produto>> Search(string q)  
-        { 
-            string sql = "SELECT * Produto WHERE descricao LIKE '%" + q + "%'"; 
  
-            return _conn.QueryAsync<Produto>(sql); 
-        } 
     } 
 }
