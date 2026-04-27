@@ -11,6 +11,19 @@
 
 
     <VerticalStackLayout Spacing="10" Padding="10">
+
+        <Label Text="Categoria do produto"/>
+        <Picker x:Name="pck_categoria" Title="Selecione uma categoria">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Alimentos</x:String>
+                    <x:String>Higiene</x:String>
+                    <x:String>Limpeza</x:String>
+                    <x:String>Outros</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
         <Label Text="Descrição do produto"/>
         <Entry x:Name="txt_descricao"/>
 

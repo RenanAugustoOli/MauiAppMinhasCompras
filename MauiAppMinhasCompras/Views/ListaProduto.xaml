@@ -18,8 +18,22 @@
     </ContentPage.Resources>
     
     <StackLayout>
+
+        <Picker x:Name="pck_filtro" Title="Filtrar por Categoria" Margin="15,10,15,0" SelectedIndexChanged="pck_filtro_SelectedIndexChanged">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Todas</x:String>
+                    <x:String>Alimentos</x:String>
+                    <x:String>Higiene</x:String>
+                    <x:String>Limpeza</x:String>
+                    <x:String>Outros</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        
+        
         <SearchBar x:Name="txt_search"
-                   Margin="-15, 0, 0, 0"
+                   Margin="15,10,15,0"
                    Placeholder="Busca de Produtos"
                    TextChanged="txt_search_TextChanged"/>
         

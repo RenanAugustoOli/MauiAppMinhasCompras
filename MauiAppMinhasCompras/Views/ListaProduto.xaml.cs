@@ -67,13 +67,30 @@ public partial class ListaProduto : ContentPage
         }
     }
 
-    private void ToolbarItem_Clicked_1(object sender, EventArgs e)
+    private async void ToolbarItem_Clicked_1(object sender, EventArgs e)
     {
-        double soma = lista.Sum(i => i.Total);
+        try
+        {
+            
+            List<Produto> todosProdutos = await App.Db.GetAll();
 
-        string msg = $"O total é {soma:C}";
+            var resumo = todosProdutos
+                .GroupBy(p => p.Categoria ?? "Sem Categoria")
+                .Select(g => $"{g.Key}: {g.Sum(x => x.Total):C}");
 
-        DisplayAlert("Total dos Produtos", msg, "OK");
+            
+            string mensagem = string.Join("\n", resumo);
+
+           
+            double totalGeral = todosProdutos.Sum(i => i.Total);
+            mensagem += $"\n\nTotal Geral: {totalGeral:C}";
+
+            await DisplayAlert("Relatório por Categoria", mensagem, "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ops", ex.Message, "OK");
+        }
     }
 
     private async void MenuItem_Clicked(object sender, EventArgs e)
@@ -136,4 +153,30 @@ public partial class ListaProduto : ContentPage
             lst_produtos.IsRefreshing = false;
         }
     }
+
+
+    private async void pck_filtro_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            string categoria = pck_filtro.SelectedItem?.ToString();
+            lista.Clear();
+
+            List<Produto> tmp = await App.Db.GetAll();
+
+            // Se escolheu algo diferente de "Todas", nós filtramos
+            if (categoria != "Todas" && !string.IsNullOrEmpty(categoria))
+            {
+                tmp = tmp.Where(p => p.Categoria == categoria).ToList();
+            }
+
+            tmp.ForEach(i => lista.Add(i));
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ops", ex.Message, "OK");
+        }
+    }
+
+
 }
